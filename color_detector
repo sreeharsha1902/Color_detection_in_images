@@ -1,0 +1,53 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+img=cv2.imread(r"C:\Users\texthere\Desktop\images.jpg")
+plt.figure(figsize=(20,8))
+plt.imshow(img)
+
+rgb1= cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+plt.figure(figsize=(20,8))
+plt.imshow(rgb1)
+
+hsv=cv2.cvtColor(rgb1, cv2.COLOR_RGB2HSV)
+
+#rages for each color
+
+#green
+#lower_range = np.array([35,100,100]) 
+#upper_range = np.array([65,255,255])
+
+#yellow
+#lower_range = np.array([15,99,56]) 
+#upper_range = np.array([35,255,255])
+
+ #red
+#lower_range = np.array([0,155,84])
+#upper_range = np.array([10,255,255])
+
+#sea-green
+#lower_range = np.array([70,50,50]) 
+#upper_range = np.array([95,255,255])
+
+#blue
+lower_range = np.array([95,50,50]) 
+upper_range = np.array([130,255,255])
+
+mask = cv2.inRange(hsv, lower_range, upper_range)
+mask = cv2.inRange(hsv, lower_range, upper_range)
+
+
+plt.figure(figsize=(20,8))
+plt.imshow(mask)
+
+res = cv2.bitwise_and(rgb1,rgb1,mask=mask)
+
+
+plt.figure(figsize=(20,8))
+plt.imshow(res)
+
+
+cv2.imshow('image',rgb1)
